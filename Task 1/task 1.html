@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Library Management</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #2c3e50;
+    }
+
+    input, button {
+      padding: 8px;
+      margin: 5px 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    th {
+      background-color: #f0f0f0;
+    }
+
+    .btn {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Library Management</h1>
+
+  <p>Enter book details:</p>
+  <input type="text" id="bookTitle" placeholder="Book Title">
+  <input type="text" id="bookAuthor" placeholder="Author Name">
+  <button class="btn" onclick="addBook()">Add Book</button>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+      </tr>
+    </thead>
+    <tbody id="bookTableBody">
+      <!-- Books will appear here -->
+    </tbody>
+  </table>
+
+  <script>
+    function addBook() {
+      const title = document.getElementById("bookTitle").value.trim();
+      const author = document.getElementById("bookAuthor").value.trim();
+
+      if (title === "" || author === "") {
+        alert("Please enter both title and author.");
+        return;
+      }
+
+      const table = document.getElementById("bookTableBody");
+      const row = document.createElement("tr");
+
+      row.innerHTML = `<td>${title}</td><td>${author}</td>`;
+      table.appendChild(row);
+
+      document.getElementById("bookTitle").value = "";
+      document.getElementById("bookAuthor").value = "";
+    }
+  </script>
+
+</body>
+</html>
