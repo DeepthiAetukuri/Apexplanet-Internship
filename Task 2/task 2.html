@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Intermediate Web Project</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f4f4;
+    }
+
+    header {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 1em;
+    }
+
+    nav {
+      background: #555;
+      color: white;
+      padding: 1em;
+      text-align: center;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 20px;
+      gap: 20px;
+    }
+
+    .section {
+      flex: 1 1 300px;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      box-sizing: border-box;
+    }
+
+    button {
+      background: #3498db;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #2980b9;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background: #eee;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .grid-layout {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+    }
+
+    .grid-layout div {
+      background: #ddd;
+      padding: 20px;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    @media (min-width: 600px) {
+      nav {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Intermediate HTML, CSS & JavaScript Project</h1>
+  </header>
+
+  <nav>
+    Responsive Navigation Bar
+  </nav>
+
+  <div class="container">
+    <!-- Contact Form -->
+    <div class="section">
+      <h2>Contact Us</h2>
+      <form id="contactForm">
+        <input type="text" id="name" placeholder="Your Name" required />
+        <input type="email" id="email" placeholder="Your Email" required />
+        <textarea id="message" placeholder="Your Message" required></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+
+    <!-- To-Do List -->
+    <div class="section">
+      <h2>To-Do List</h2>
+      <input type="text" id="taskInput" placeholder="New task..." />
+      <button onclick="addTask()">Add Task</button>
+      <ul id="taskList"></ul>
+    </div>
+  </div>
+
+  <!-- Grid Layout -->
+  <div class="section" style="margin: 20px;">
+    <h2>Responsive Grid Layout</h2>
+    <div class="grid-layout">
+      <div>Block 1</div>
+      <div>Block 2</div>
+      <div>Block 3</div>
+      <div>Block 4</div>
+    </div>
+  </div>
+
+  <script>
+    // Contact Form Validation
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      if (!name || !email || !message) {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+
+      alert("Thank you! Your message has been sent.");
+      document.getElementById("contactForm").reset();
+    });
+
+    // To-Do List Logic
+    function addTask() {
+      const taskInput = document.getElementById("taskInput");
+      const taskText = taskInput.value.trim();
+      if (taskText === "") return;
+
+      const li = document.createElement("li");
+      li.textContent = taskText;
+      li.onclick = () => li.remove(); // click to remove
+      document.getElementById("taskList").appendChild(li);
+      taskInput.value = "";
+    }
+  </script>
+
+</body>
+</html>
