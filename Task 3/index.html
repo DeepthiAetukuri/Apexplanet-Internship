@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Healthcare Management</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Healthcare Management System</h1>
+  </header>
+
+  <section class="form-section">
+    <h2>Add Patient</h2>
+    <form id="patientForm">
+      <input type="text" id="name" placeholder="Name" required />
+      <input type="number" id="age" placeholder="Age" required />
+      <select id="gender">
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+      <input type="text" id="condition" placeholder="Condition" required />
+      <button type="submit">Add Patient</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>Patient Records</h2>
+    <table id="patientTable">
+      <tr>
+        <th>Name</th><th>Age</th><th>Gender</th><th>Condition</th>
+      </tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>Need a Smile? 😊</h2>
+    <button onclick="getJoke()">Get Health Joke</button>
+    <p id="joke"></p>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
