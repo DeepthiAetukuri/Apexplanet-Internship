@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Deepthi Aetukuri - Full Project</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+      line-height: 1.6;
+    }
+    header {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+    nav a {
+      color: #fff;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+    section {
+      background: #fff;
+      padding: 20px;
+      margin: 10px;
+    }
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+    input, select, button {
+      margin: 5px 0;
+      padding: 10px;
+      width: 100%;
+      max-width: 300px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    ul li {
+      background: #eee;
+      margin: 5px 0;
+      padding: 10px;
+      cursor: pointer;
+    }
+    .product {
+      background: #e1f5fe;
+      margin: 5px 0;
+      padding: 10px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 24px;
+      }
+      nav a {
+        display: block;
+        margin: 10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Deepthi Aetukuri - Full Project</h1>
+  <nav>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#todo">To-Do App</a>
+    <a href="#products">Product Page</a>
+  </nav>
+</header>
+
+<section id="portfolio">
+  <h2>👩‍💻 Personal Portfolio</h2>
+  <p><strong>About Me:</strong> I am a Data Science student with skills in HTML, CSS, JavaScript, Python,Data Analytics and AI. I love building web apps and solving problems with tech.</p>
+  <h3>Projects:</h3>
+  <ul>
+    <li> Online Voting Application using Blockchain</li>
+    <li> Image to Text Conversion using Optical Character Recognition</li>
+    <li> Cloud Service Composition using Redfox Algorithm</li>
+    <li> EasyFuel:An online Fuel Delivery Application using Deeplearning</li>
+  </ul>
+  <p><strong>Contact:</strong> deepthiaetukuri@gmail.com | Hyderabad, Telangana</p>
+</section>
+
+<section id="todo">
+  <h2>📝 To-Do List with Local Storage</h2>
+  <input type="text" id="taskInput" placeholder="Enter a task">
+  <button onclick="addTask()">Add Task</button>
+  <ul id="taskList"></ul>
+</section>
+
+<section id="products">
+  <h2>🛒 Product Listing Page</h2>
+  <label>Sort by:</label>
+  <select id="sort" onchange="displayProducts()">
+    <option value="name">Name</option>
+    <option value="price">Price</option>
+  </select>
+  <div id="productList"></div>
+</section>
+
+<footer>
+  <p>&copy; 2025 Deepthi Aetukuri</p>
+</footer>
+
+<script>
+  // To-Do App
+  function addTask() {
+    const taskInput = document.getElementById("taskInput");
+    const task = taskInput.value.trim();
+    if (task) {
+      let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      tasks.push(task);
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+      taskInput.value = "";
+      renderTasks();
+    }
+  }
+
+  function renderTasks() {
+    const taskList = document.getElementById("taskList");
+    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    taskList.innerHTML = "";
+    tasks.forEach((task, index) => {
+      const li = document.createElement("li");
+      li.textContent = task;
+      li.onclick = () => {
+        tasks.splice(index, 1);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        renderTasks();
+      };
+      taskList.appendChild(li);
+    });
+  }
+  renderTasks();
+
+  // Product Listing
+  const products = [
+    { name: "Stethoscope", price: 500, category: "Equipment" },
+    { name: "Thermometer", price: 150, category: "Equipment" },
+    { name: "Vitamin Tablets", price: 250, category: "Medicine" },
+  ];
+
+  function displayProducts() {
+    const sort = document.getElementById("sort").value;
+    const list = document.getElementById("productList");
+    let sorted = [...products];
+    if (sort === "price") {
+      sorted.sort((a, b) => a.price - b.price);
+    } else {
+      sorted.sort((a, b) => a.name.localeCompare(b.name));
+    }
+    list.innerHTML = sorted.map(p =>
+      `<div class="product"><strong>${p.name}</strong> - ₹${p.price} [${p.category}]</div>`
+    ).join("");
+  }
+  displayProducts();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<h2>Product Store</h2>
+<select id="sort" onchange="displayProducts()"> 
+  <option value="name">Sort by Name</option>
+  <option value="price">Sort by Price</option>
+</select>
+
+<div id="products"></div>
+
+<script>
+const items = [
+  { name: "Stethoscope", category: "Equipment", price: 500 },
+  { name: "Thermometer", category: "Equipment", price: 150 },
+  { name: "Vitamin Tablets", category: "Medicine", price: 250 },
+];
+
+function displayProducts() {
+  const sortType = document.getElementById("sort").value;
+  const sorted = [...items].sort((a, b) => {
+    if (sortType === "price") return a.price - b.price;
+    return a.name.localeCompare(b.name);
+  });
+
+  document.getElementById("products").innerHTML = sorted.map(p =>
+    `<div><strong>${p.name}</strong> - ₹${p.price} [${p.category}]</div>`
+  ).join("");
+}
+
+displayProducts();
+</script>
